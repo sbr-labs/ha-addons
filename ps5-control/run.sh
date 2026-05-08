@@ -17,6 +17,7 @@ PS5_HOST=$(jq -r '.ps5_host // ""' "$CONFIG_FILE")
 ACCOUNT_ID=$(jq -r '.account_id // ""' "$CONFIG_FILE")
 OAUTH_REDIRECT=$(jq -r '.oauth_redirect_url // ""' "$CONFIG_FILE")
 PIN=$(jq -r '.pin // ""' "$CONFIG_FILE")
+HOME_IMAGE_URL=$(jq -r '.home_image_url // ""' "$CONFIG_FILE")
 LOG_LEVEL=$(jq -r '.log_level // "INFO"' "$CONFIG_FILE")
 
 if [[ -z "$PS5_HOST" ]]; then
@@ -127,5 +128,17 @@ export PS5_CREDS="$CREDS_FILE"
 export LISTEN_HOST="0.0.0.0"
 export LISTEN_PORT="8456"
 export PS5_CTRL_LOG_LEVEL="$LOG_LEVEL"
+
+# Home-screen / fallback image. If the user supplied a URL, the daemon
+# uses it. Otherwise fall back to the bundled default image (added in
+# v0.4.20) so the Remote 3 media-player widget shows something rather
+# than a blank box.
+if [[ -n "$HOME_IMAGE_URL" ]]; then
+  export HOME_IMAGE_URL
+  echo "==> Using home_image_url from add-on options: $HOME_IMAGE_URL"
+elif [[ -f /app/default-home-image.svg ]]; then
+  export HOME_IMAGE_FILE=/app/default-home-image.svg
+  echo "==> Using bundled default home image (set home_image_url in options to override)."
+fi
 
 exec python /app/daemon.py
