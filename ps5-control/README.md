@@ -18,7 +18,7 @@ Runs the [`ps5-control-uc`](https://github.com/sbr-labs/ps5-control-uc) daemon i
 ## First-time pairing
 
 You'll need three things:
-1. **PS5's LAN IP** (Settings → Network → View Connection Status → IP Address). Looks like `192.168.1.107`.
+1. **PS5's LAN IP** (Settings → Network → View Connection Status → IP Address). Looks like `192.168.1.50`.
 2. **Your PSN Account ID** — short Base64 string ending in `=`, e.g. `aBc1dEfg23h=`.
    - Public PSN profile: paste your PSN online ID into [psn.flipscreen.games](https://psn.flipscreen.games) and copy the *Base64 Account ID*.
    - Private PSN profile: use the OAuth helper from the [main repo](https://github.com/sbr-labs/ps5-control-uc) (`./get-account-id.sh`) on any machine with Docker.

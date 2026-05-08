@@ -1,7 +1,7 @@
 configuration:
   ps5_host:
     name: PS5 IP address
-    description: LAN IP of your PS5 (Settings → Network → View Connection Status → IP Address). Example "192.168.1.107".
+    description: LAN IP of your PS5 (Settings → Network → View Connection Status → IP Address). Example "192.168.1.50".
   account_id:
     name: PSN Account ID
     description: Base64 string ending in '=' (e.g. "aBc1dEfg23h="). Look up via https://psn.flipscreen.games for public profiles, or use the OAuth helper from the main repo for private profiles. The decimal form Sony also returns will be auto-converted.
