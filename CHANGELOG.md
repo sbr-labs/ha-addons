@@ -5,6 +5,21 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.24] - 2026-05-08
+
+### Changed
+- **Wakeup is now instant.** `POST /wakeup` returns as soon as the
+  Wake-on-LAN packet is sent, instead of blocking up to 60 seconds
+  waiting for the PS5 to finish booting. Cold-boot from rest mode
+  takes 25–45 seconds — well past most HTTP timeouts — so callers
+  (UC Remote 3 activities, HA scripts, voice intents) sometimes saw
+  spurious timeout errors even though the PS5 was actually waking
+  up correctly. Now the call completes in ~1 s; the daemon
+  pre-warms the Remote Play session in the background so the first
+  button press after wake is still instant. Power-state polling on
+  the integration side picks up the "on" state within 10 seconds
+  of the PS5 finishing boot.
+
 ## [0.4.23] - 2026-05-08
 
 ### Added
