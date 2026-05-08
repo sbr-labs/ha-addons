@@ -15,25 +15,57 @@ Runs the [`ps5-control-uc`](https://github.com/sbr-labs/ps5-control-uc) daemon i
 1. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Repositories**, paste `https://github.com/sbr-labs/ha-addons`, click **Add**.
 2. Refresh, find **PS5 Control**, click **Install**. Build takes ~1–3 minutes (longer on Pi 3 / armv7 — pip compiles a few packages from source, that's normal).
 
-## First-time pairing
+## First-time setup
 
 You'll need three things:
-1. **PS5's LAN IP** (Settings → Network → View Connection Status → IP Address). Looks like `192.168.1.50`.
+1. **Your PS5's LAN IP** (PS5 → Settings → Network → View Connection Status → IP Address). Example: `192.168.1.50`.
 2. **Your PSN Account ID** — short Base64 string ending in `=`, e.g. `aBc1dEfg23h=`.
-   - Public PSN profile: paste your PSN online ID into [psn.flipscreen.games](https://psn.flipscreen.games) and copy the *Base64 Account ID*.
-   - Private PSN profile: use the OAuth helper from the [main repo](https://github.com/sbr-labs/ps5-control-uc) (`./get-account-id.sh`) on any machine with Docker.
-   - If you only have the long decimal form (`7067298559098XXXXXX`), paste it in — the add-on auto-converts.
-3. **An 8-digit pairing PIN** generated on the PS5 RIGHT BEFORE starting the add-on. PS5 → Settings → System → Remote Play → Link Device. PINs expire after ~5 minutes.
+3. **An 8-digit pairing PIN** generated on the PS5 RIGHT BEFORE the pair step. PS5 → Settings → System → Remote Play → Link Device. PINs expire after ~5 minutes.
 
-Then in the add-on **Configuration** tab:
-- Set `ps5_host` to your PS5's LAN IP
-- Set `account_id` to your Base64 Account ID
-- Set `pin` to the fresh 8-digit PIN
-- Save, then **Start** the add-on
-- Watch the log — you should see `==> Pairing succeeded. credentials.json saved`
-- **Clear the `pin` field** in Configuration (so it doesn't sit there and isn't retried)
+The add-on includes a **built-in OAuth helper** so you don't need any other machine to get your PSN Account ID — even for private profiles.
 
-The add-on will save `credentials.json` to `/data/credentials.json` (HA add-on persistent storage). Pairing is one-time — subsequent starts skip it.
+### Step 1: Set ps5_host and start the add-on
+
+In the add-on **Configuration** tab:
+- Set `ps5_host` to your PS5's LAN IP (only required field)
+- Leave everything else blank
+- Save → **Start** the add-on
+- Open the **Log** tab
+
+The log will offer two paths to get your Account ID:
+
+**Path A — Public PSN profile (easiest):**
+Open [psn.flipscreen.games](https://psn.flipscreen.games), type your PSN online ID, copy the *Base64 Account ID*. Skip to Step 3.
+
+**Path B — Built-in OAuth (works for private profiles too):**
+The log will show a Sony PSN sign-in URL. Open it on any device, sign in, the browser will redirect to a page that looks like an error/blank page — that's normal. Copy the FULL URL from your browser's address bar (starts with `https://remoteplay.dl.playstation.net/...`). Continue to Step 2.
+
+### Step 2: Run the OAuth helper (only if you used Path B)
+
+Back in the add-on **Configuration** tab:
+- Paste the redirect URL into the `oauth_redirect_url` field
+- Save → **Start** the add-on
+- The Log will print your Account ID in a box
+
+### Step 3: Set account_id, generate PIN, pair
+
+In the **Configuration** tab:
+- Paste your Account ID into the `account_id` field
+- **Clear the `oauth_redirect_url` field** (leave blank)
+- Generate a fresh PIN on the PS5 (PS5 → Settings → System → Remote Play → Link Device) — *do this RIGHT before the next save, PINs expire in ~5 min*
+- Set the `pin` field to those 8 digits
+- Save → **Start** the add-on
+- Log should show `==> Pairing succeeded. credentials.json saved`
+
+### Step 4: Clean up
+
+In the **Configuration** tab:
+- Clear the `pin` field (no longer needed)
+- Restart the add-on. From now on it just starts the daemon — no pairing.
+
+The add-on saves `credentials.json` to `/data/credentials.json` (HA's persistent add-on storage). Pairing is one-time — survives add-on updates and HA reboots.
+
+> **Decimal Account ID**: if you find your Account ID as a 19-digit decimal number (e.g. `7067298559098XXXXXX`), you can paste it directly — the add-on auto-converts to base64.
 
 ## Connect the Unfolded Circle Remote 3
 

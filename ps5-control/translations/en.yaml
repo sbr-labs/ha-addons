@@ -3,11 +3,14 @@ configuration:
     name: PS5 IP address
     description: LAN IP of your PS5 (Settings → Network → View Connection Status → IP Address). Example "192.168.1.50".
   account_id:
-    name: PSN Account ID
-    description: Base64 string ending in '=' (e.g. "aBc1dEfg23h="). Look up via https://psn.flipscreen.games for public profiles, or use the OAuth helper from the main repo for private profiles. The decimal form Sony also returns will be auto-converted.
+    name: PSN Account ID (Base64)
+    description: Short Base64 string ending in '=' (e.g. "aBc1dEfg23h="). Get it from https://psn.flipscreen.games (public profiles) or use the built-in OAuth helper below (any profile, including private). Decimal form is also accepted — the add-on auto-converts to base64.
+  oauth_redirect_url:
+    name: OAuth redirect URL (helper only)
+    description: Leave blank unless using the built-in OAuth helper. Start the add-on with this AND account_id both blank to print Sony's sign-in URL in the log; sign in; paste the FULL post-login redirect URL here; restart — the add-on prints your Account ID; clear this field and paste the Account ID into account_id.
   pin:
     name: 8-digit pairing PIN (one-time)
-    description: ONLY needed for first-time pairing. Generate on the PS5 (Settings → System → Remote Play → Link Device) RIGHT BEFORE starting the add-on — PIN is valid ~5 min. After pairing succeeds, clear this field.
+    description: Only needed once after account_id is set. Generate on the PS5 (Settings → System → Remote Play → Link Device) RIGHT BEFORE starting the add-on — PINs expire in ~5 min. After pairing succeeds, clear this field.
   log_level:
     name: Log level
     description: Daemon log verbosity. Set DEBUG only for troubleshooting.
