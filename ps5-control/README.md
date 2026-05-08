@@ -2,6 +2,18 @@
 
 Runs the [`ps5-control-uc`](https://github.com/sbr-labs/ps5-control-uc) daemon inside your Home Assistant Supervisor / HAOS box. Drives a PlayStation 5 over Sony Remote Play, exposes an HTTP API on port `8456` for the Unfolded Circle Remote 3 (or HA scripts, voice intents, custom dashboards).
 
+This add-on does **not** use MQTT, does **not** require any internet-facing port-forward, and only exposes its HTTP API on your **LAN**.
+
+## ⚠️ Migrating from the legacy `ps5-mqtt` add-on (read this)
+
+If you previously ran the community **`ps5-mqtt`** add-on (`funkeyflo/ps5-mqtt`) and you've now moved to this add-on, do all three:
+
+1. **Uninstall the `ps5-mqtt` add-on** in HA → Settings → Add-ons. Stopping isn't enough — uninstall it. Otherwise it keeps a Mosquitto broker active on `1883/8883` for no reason.
+2. **Remove any router port-forward** you set up for the legacy add-on. Common ones to delete: `1883/tcp`, `8883/tcp`. The new add-on doesn't need any WAN forward — communication is LAN-only on `8456`.
+3. **Make sure your Mosquitto broker is LAN-only.** If you don't otherwise use MQTT, you can also uninstall the **Mosquitto broker** add-on. If you do use MQTT (e.g. Zigbee2MQTT), leave Mosquitto installed but verify there's no public forward to it. From a phone on 4G, run `nc -zv <your-public-ip> 8883` — it should time out.
+
+A leaked `1883`/`8883` listener — even with TLS — is the #1 reason ISPs (Vodafone, BT, EE, Sky) send "insecure MQTT service detected" warnings to home users. It's not specific to this project; it's a symptom of leftover state from the legacy add-on. Cleaning up the three items above resolves the warning.
+
 ## Prerequisites on the PS5 (one-time)
 
 - **Settings → System → Remote Play → Enable Remote Play** → ON

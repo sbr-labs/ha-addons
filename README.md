@@ -16,6 +16,8 @@ Click **Add**, refresh. A new "PS5 Control" entry appears under "PS5 Control add
 
 See [`ps5-control/README.md`](ps5-control/README.md) for setup, pairing, and troubleshooting.
 
+> **Coming from `ps5-mqtt`?** Read the [migration warning](ps5-control/README.md#%EF%B8%8F-migrating-from-the-legacy-ps5-mqtt-add-on-read-this) — uninstall the old add-on and delete any 1883/8883 port-forwards. This add-on is LAN-only on `8456` and needs no WAN forward.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
