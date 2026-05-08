@@ -129,16 +129,21 @@ export LISTEN_HOST="0.0.0.0"
 export LISTEN_PORT="8456"
 export PS5_CTRL_LOG_LEVEL="$LOG_LEVEL"
 
-# Home-screen / fallback image. If the user supplied a URL, the daemon
-# uses it. Otherwise fall back to the bundled default image (added in
-# v0.4.20) so the Remote 3 media-player widget shows something rather
-# than a blank box.
+# Home-screen / fallback image priority (since v0.4.21):
+#  1. user-supplied home_image_url in add-on options (any external URL)
+#  2. official PS5 wordmark hosted on Wikimedia Commons (default)
+#  3. bundled generic gamepad SVG inside the container (fallback if the
+#     Wikipedia URL ever stops working)
+DEFAULT_PS5_LOGO_URL="https://upload.wikimedia.org/wikipedia/commons/c/cb/PlayStation_5_logo_and_wordmark.svg"
 if [[ -n "$HOME_IMAGE_URL" ]]; then
   export HOME_IMAGE_URL
   echo "==> Using home_image_url from add-on options: $HOME_IMAGE_URL"
-elif [[ -f /app/default-home-image.svg ]]; then
-  export HOME_IMAGE_FILE=/app/default-home-image.svg
-  echo "==> Using bundled default home image (set home_image_url in options to override)."
+else
+  export HOME_IMAGE_URL="$DEFAULT_PS5_LOGO_URL"
+  echo "==> Using default PS5 wordmark from Wikimedia Commons."
 fi
+# Also expose the bundled SVG as a file fallback the daemon will serve
+# from /home_image if anything explicit sets HOME_IMAGE_FILE.
+export HOME_IMAGE_FILE=/app/default-home-image.svg
 
 exec python /app/daemon.py
