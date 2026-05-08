@@ -2,7 +2,7 @@ name: PS5 Control
 version: "0.4.15"
 slug: ps5_control
 description: PlayStation 5 control via Sony Remote Play. Exposes HTTP API on :8456 for the Unfolded Circle Remote 3, HA scripts, voice intents, etc.
-url: https://github.com/sbr-labs/ha-ps5-control-addon
+url: https://github.com/sbr-labs/ha-addons
 arch:
   - aarch64
   - amd64

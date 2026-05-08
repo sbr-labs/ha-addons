@@ -12,7 +12,7 @@ Runs the [`ps5-control-uc`](https://github.com/sbr-labs/ps5-control-uc) daemon i
 
 ## Install
 
-1. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Repositories**, paste `https://github.com/sbr-labs/ha-ps5-control-addon`, click **Add**.
+1. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Repositories**, paste `https://github.com/sbr-labs/ha-addons`, click **Add**.
 2. Refresh, find **PS5 Control**, click **Install**. Build takes ~1–3 minutes (longer on Pi 3 / armv7 — pip compiles a few packages from source, that's normal).
 
 ## First-time pairing

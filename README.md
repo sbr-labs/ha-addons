@@ -7,7 +7,7 @@ Home Assistant add-on that runs the [`ps5-control-uc`](https://github.com/sbr-la
 Home Assistant → **Settings → Add-ons → Add-on Store → ⋮ → Repositories**, paste:
 
 ```
-https://github.com/sbr-labs/ha-ps5-control-addon
+https://github.com/sbr-labs/ha-addons
 ```
 
 Click **Add**, refresh. A new "PS5 Control" entry appears under "PS5 Control add-ons" — click it, then **Install**.
