@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1628"/>
+      <stop offset="1" stop-color="#1a2a4a"/>
+    </linearGradient>
+    <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dcdce0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <g transform="translate(640 340)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif"
+          font-size="220" font-weight="900" fill="#ffffff" text-anchor="middle"
+          letter-spacing="6" dominant-baseline="middle">PS5</text>
+    <text x="0" y="120" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+          font-size="48" font-weight="500" fill="#88aabb" text-anchor="middle"
+          letter-spacing="8" dominant-baseline="middle">CONTROL</text>
+  </g>
+  <g transform="translate(640 600)">
+    <path d="M -180 -30 Q -240 -30 -240 36 L -240 80 Q -240 114 -200 114 L -160 114 Q -130 114 -110 88 L -90 56 L 90 56 L 110 88 Q 130 114 160 114 L 200 114 Q 240 114 240 80 L 240 36 Q 240 -30 180 -30 Z"
+          fill="url(#pad)"/>
+    <circle cx="-130" cy="40" r="20" fill="#1a2a4a"/>
+    <circle cx="-130" cy="40" r="12" fill="#0a1628"/>
+    <circle cx="50" cy="40" r="20" fill="#1a2a4a"/>
+    <circle cx="50" cy="40" r="12" fill="#0a1628"/>
+    <rect x="-78" y="-18" width="44" height="14" rx="2" fill="#1a2a4a"/>
+    <rect x="-63" y="-33" width="14" height="44" rx="2" fill="#1a2a4a"/>
+    <circle cx="160" cy="-25" r="9" fill="#1a2a4a"/>
+    <circle cx="180" cy="-5" r="9" fill="#1a2a4a"/>
+    <circle cx="140" cy="-5" r="9" fill="#1a2a4a"/>
+    <circle cx="160" cy="15" r="9" fill="#1a2a4a"/>
+  </g>
+  <text x="640" y="690" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+        font-size="22" font-weight="400" fill="#5a708a" text-anchor="middle">
+    sbr-labs · Remote Play daemon · Unfolded Circle Remote 3 integration
+  </text>
+</svg>

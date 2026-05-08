@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1628"/>
+      <stop offset="1" stop-color="#1a2a4a"/>
+    </linearGradient>
+    <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dcdce0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="64" fill="url(#bg)"/>
+  <text x="256" y="180" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif"
+        font-size="120" font-weight="900" fill="#ffffff" text-anchor="middle"
+        letter-spacing="2">PS5</text>
+  <g transform="translate(256 340)">
+    <path d="M -110 -30 Q -148 -30 -148 18 L -148 50 Q -148 78 -120 78 L -90 78 Q -68 78 -56 56 L -45 36 L 45 36 L 56 56 Q 68 78 90 78 L 120 78 Q 148 78 148 50 L 148 18 Q 148 -30 110 -30 Z"
+          fill="url(#pad)"/>
+    <circle cx="-78" cy="22" r="13" fill="#1a2a4a"/>
+    <circle cx="-78" cy="22" r="8" fill="#0a1628"/>
+    <circle cx="34" cy="22" r="13" fill="#1a2a4a"/>
+    <circle cx="34" cy="22" r="8" fill="#0a1628"/>
+    <rect x="-46" y="-12" width="26" height="8" rx="2" fill="#1a2a4a"/>
+    <rect x="-37" y="-21" width="8" height="26" rx="2" fill="#1a2a4a"/>
+    <circle cx="100" cy="-15" r="6" fill="#1a2a4a"/>
+    <circle cx="115" cy="0" r="6" fill="#1a2a4a"/>
+    <circle cx="85" cy="0" r="6" fill="#1a2a4a"/>
+    <circle cx="100" cy="15" r="6" fill="#1a2a4a"/>
+  </g>
+</svg>
