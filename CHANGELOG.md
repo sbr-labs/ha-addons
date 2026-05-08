@@ -8,19 +8,17 @@ versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 ## [0.4.23] - 2026-05-08
 
 ### Added
-- **README migration & security section** for users coming from the legacy
-  `ps5-mqtt` add-on. Tells users to uninstall the old add-on, remove any
-  router port-forwards for `1883/tcp` and `8883/tcp`, and verify Mosquitto
-  is LAN-only. This resolves the "insecure MQTT service detected"
-  warnings UK ISPs (Vodafone, BT, EE, Sky) send to home users when a
-  Mosquitto broker is left exposed on the WAN — it isn't caused by this
-  add-on (no MQTT here), but the warning is a common consequence of
-  upgrading from the old MQTT-based PS5 add-on without cleaning up.
-- Top-level README links to the migration warning so it's visible
+- **Migration cleanup notes** in the README for users coming from the
+  older community `ps5-mqtt` add-on: uninstall the old add-on, delete any
+  router port-forwards (`1883/tcp` / `8883/tcp`) added for the old setup,
+  and optionally uninstall the Mosquitto broker if it isn't being used
+  for anything else (e.g. Zigbee2MQTT).
+- Top-level README links to the migration notes so they're visible
   before install.
 
 ### Changed
-- Bumped `ps5-control` add-on to `0.4.23`. No code changes — docs only.
+- Bumped `ps5-control` add-on to `0.4.23`. Docs-only release — no code
+  changes.
 
 ## [0.4.22] - 2026-05-08
 
