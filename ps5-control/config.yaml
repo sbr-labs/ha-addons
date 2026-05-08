@@ -1,7 +1,7 @@
 name: PS5 Control
-version: "0.4.16"
+version: "0.4.17"
 slug: ps5_control
-description: PlayStation 5 control via Sony Remote Play. Exposes HTTP API on :8456 for the Unfolded Circle Remote 3, HA scripts, voice intents, etc. Includes built-in OAuth helper for getting your PSN Account ID without leaving HA.
+description: PlayStation 5 control via Sony Remote Play. Exposes HTTP API on :8456 for the Unfolded Circle Remote 3, HA scripts, voice intents, etc. Includes built-in OAuth helper and a Web UI with one-click integration tarball download.
 url: https://github.com/sbr-labs/ha-addons
 arch:
   - aarch64
@@ -10,6 +10,7 @@ arch:
   - armhf
 init: false
 host_network: true
+webui: http://[HOST]:[PORT:8456]/
 options:
   ps5_host: ""
   account_id: ""
