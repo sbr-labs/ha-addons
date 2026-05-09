@@ -5,6 +5,20 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.29] - 2026-05-09
+
+### Changed
+- **Default home image is now 16:9 (1024×576)** to match the Remote 3
+  media-player widget aspect ratio — same dimensions Sky Q programme
+  artwork uses. Previous PNG was 800×800 square so it letterboxed or
+  cropped on the widget. The bundled gamepad illustration now fills
+  the widget edge-to-edge.
+
+### Added
+- README pointer for users who'd prefer the official PS5 wordmark on
+  the widget — paste a Wikimedia-hosted PNG render URL into the
+  Configuration tab, no redistribution involved.
+
 ## [0.4.28] - 2026-05-09
 
 ### Changed

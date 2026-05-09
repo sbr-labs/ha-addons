@@ -105,12 +105,23 @@ Click the **Restart** button at the top of the add-on page. About 10 seconds lat
 
 Same place — **Configuration** tab, clear the **Custom media-player image** field (leave it blank), Save, Restart. The PS5 wordmark comes back.
 
+### Want the official PS5 wordmark instead of the default gamepad?
+
+The default is a generic gamepad illustration so the project doesn't redistribute Sony trademarks. If you'd rather see the official PS5 wordmark on the widget, paste this URL into the **Custom media-player image** field, Save, Restart:
+
+```
+https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/PlayStation_5_logo_and_wordmark.svg/500px-PlayStation_5_logo_and_wordmark.svg.png
+```
+
+This is the Wikimedia-hosted PNG render of the wordmark — works straight out of the box, no copyright issues since you're personally pointing your own widget at Wikimedia's copy.
+
 ### "But my picture still doesn't show up!"
 
 - **Did the link end in `.png` or `.jpg`?** If it ends in `.svg`, `.html`, `.webp`, or anything else, the Remote 3 won't render it.
 - **Does the link work in a private/incognito browser tab?** If you only see the picture when logged in to that website, the Remote 3 can't see it either.
 - **Did you copy the *page* URL instead of the *image* URL?** Right-click the picture itself, not the page.
 - **Wikipedia / Pinterest / Imgur problems?** Those sites sometimes block "hot-linking" — using their pictures from outside their website. Easiest fix: upload your picture to a free image host like [imgbb.com](https://imgbb.com) or [postimages.org](https://postimages.org) and use the direct link they give you. Make sure the link ends in `.png` or `.jpg`.
+- **Picture looks letterboxed or stretched?** The Remote 3's media-player widget is **16:9 (widescreen)**, ~1024×576. Square images get black bars on the sides; very tall images get cropped. For best fit use a 16:9 PNG/JPG.
 
 ## Connect the Unfolded Circle Remote 3
 
