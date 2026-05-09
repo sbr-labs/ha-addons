@@ -5,6 +5,17 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.28] - 2026-05-09
+
+### Changed
+- README rewritten in plain-English step-by-step form for setting
+  a custom media-player picture: "right-click the picture → Copy
+  image address → check the link ends in .png/.jpg → paste it into
+  the Configuration tab → Save → Restart". Adds a troubleshooting
+  block for the most common confusions (link ends in .svg / copied
+  the page URL instead of the image / hot-link blocking on Wikipedia
+  / Pinterest / Imgur). Docs only.
+
 ## [0.4.27] - 2026-05-09
 
 ### Changed

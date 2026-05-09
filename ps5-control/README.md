@@ -79,24 +79,38 @@ The add-on saves `credentials.json` to `/data/credentials.json` (HA's persistent
 
 ## Use your own picture on the media-player widget (optional)
 
-By default, the Remote 3 shows a PS5 wordmark on the media-player widget when the PS5 is on the home screen (no game running). Easy to swap for any picture you like — a screenshot, a piece of art, your dog, anything.
+By default, the Remote 3 shows a PS5 wordmark on the media-player widget when the PS5 is on the home screen (no game running). You can swap it for any picture you like — a screenshot, a piece of art, anything.
 
-**Step by step:**
+### Step 1 — Find a picture and get its link
 
-1. **Find the picture you want.** It must be a **PNG or JPG file** (not SVG, not a webpage). Anything you can right-click in a browser and "Save image as…" works.
-2. **Get a direct link to it.** Two easy options:
-   - **Already online?** Right-click the image in your browser → **"Copy image address"** (Chrome/Edge) or **"Copy image link"** (Safari/Firefox). The URL should end in `.png`, `.jpg`, or `.jpeg`. If it ends in `.html` or anything else, that's the webpage, not the image — keep digging until the URL ends in a picture extension.
-   - **On your computer?** Drag it into Imgur, Cloudinary, GitHub Gist, or any image host that gives you a direct file URL. Or put it on your own server.
-3. **In Home Assistant**: open this add-on → **Configuration** tab → set **`home_image_url`** to the URL you just copied → **Save**.
-4. **Restart the add-on** (red **Restart** button at the top, or the **⋮** menu). New picture shows on the Remote 3 within ~10 seconds.
+1. Find any picture on the internet you'd like to use.
+2. **Right-click the picture** in your browser → click **"Copy image address"** (Chrome / Edge) or **"Copy image link"** (Safari / Firefox).
+3. **Check the link ends in `.png`, `.jpg`, or `.jpeg`** — paste it into a new browser tab; you should see the picture by itself, with no website around it.
+   - If the link ends in `.html` or `.com` or anything else, you copied the webpage instead. Try right-clicking the picture itself, not the page.
+   - If the link ends in `.svg` it won't work — the Remote 3 only displays `.png` or `.jpg`.
 
-**That's it.** To go back to the default PS5 wordmark, just clear the field and restart.
+### Step 2 — Paste it into the add-on
 
-> **Common gotchas**
-> - URL ends in `.svg` → won't work. The Remote 3 only renders PNG/JPG.
-> - Pasted a Wikipedia / Pinterest / Imgur *page* URL → won't work. You need the direct *image* URL (right-click → Copy image address).
-> - URL works in your browser but Remote 3 shows nothing → host might block hot-linking. Try a different host or a personal cloud upload.
-> - Want to use a local file with no internet host involved? See **`HOME_IMAGE_FILE`** in the [docker-compose docs](https://github.com/sbr-labs/ps5-control-uc/blob/main/daemon/docker-compose.yml) — same env var works inside this add-on if you mount the file into `/share/`.
+1. In Home Assistant, go to **Settings** → **Add-ons** → **PS5 Control**.
+2. Click the **Configuration** tab at the top.
+3. Find the field labelled **"Custom media-player image (optional)"** (the `home_image_url` field).
+4. Paste the link you copied in Step 1.
+5. Click **Save** at the bottom of the page.
+
+### Step 3 — Restart the add-on
+
+Click the **Restart** button at the top of the add-on page. About 10 seconds later, your picture appears on the Remote 3's media-player widget when the PS5 is on the home screen.
+
+### Want to go back to the default?
+
+Same place — **Configuration** tab, clear the **Custom media-player image** field (leave it blank), Save, Restart. The PS5 wordmark comes back.
+
+### "But my picture still doesn't show up!"
+
+- **Did the link end in `.png` or `.jpg`?** If it ends in `.svg`, `.html`, `.webp`, or anything else, the Remote 3 won't render it.
+- **Does the link work in a private/incognito browser tab?** If you only see the picture when logged in to that website, the Remote 3 can't see it either.
+- **Did you copy the *page* URL instead of the *image* URL?** Right-click the picture itself, not the page.
+- **Wikipedia / Pinterest / Imgur problems?** Those sites sometimes block "hot-linking" — using their pictures from outside their website. Easiest fix: upload your picture to a free image host like [imgbb.com](https://imgbb.com) or [postimages.org](https://postimages.org) and use the direct link they give you. Make sure the link ends in `.png` or `.jpg`.
 
 ## Connect the Unfolded Circle Remote 3
 
