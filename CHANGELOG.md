@@ -5,6 +5,23 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.27] - 2026-05-09
+
+### Changed
+- **Clearer instructions for setting your own media-player picture.**
+  Added a dedicated step-by-step section to the README ("Use your own
+  picture on the media-player widget"), and an in-UI description for
+  the `home_image_url` Configuration field that explains exactly what
+  format the URL needs to be in (direct PNG/JPG link), how to get one
+  ("right-click → Copy image address"), and the common gotchas (SVG
+  doesn't render, page URLs aren't image URLs, hot-link blocking).
+- **Expanded "Control the PS5 from Home Assistant itself" section**
+  with copy-paste `configuration.yaml` for `rest_command` services
+  (wakeup / standby / button / launch) AND a REST sensor block for
+  power / app / box-art. Plus dashboard-button, automation,
+  voice-assist, and Mushroom media-player examples. Makes it obvious
+  the add-on works even without a Remote 3. Docs only — no code change.
+
 ## [0.4.26] - 2026-05-09
 
 ### Changed

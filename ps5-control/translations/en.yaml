@@ -11,6 +11,10 @@ configuration:
   pin:
     name: 8-digit pairing PIN (one-time)
     description: Only needed once after account_id is set. Generate on the PS5 (Settings → System → Remote Play → Link Device) RIGHT BEFORE starting the add-on — PINs expire in ~5 min. After pairing succeeds, clear this field.
+  home_image_url:
+    name: Custom media-player image (optional)
+    description: >-
+      Picture shown on the Remote 3 media-player widget when the PS5 is on the home screen (no game running). LEAVE BLANK to use the built-in PS5 wordmark — most users want this. To use your own picture, paste a direct link to a PNG or JPG file. Must end in .png or .jpg (NOT .svg, NOT a webpage). Tip — right-click any image online → "Copy image address". Example "https://example.com/my-art.png". Save → Restart the add-on. New image appears on the Remote within ~10 seconds.
   log_level:
     name: Log level
     description: Daemon log verbosity. Set DEBUG only for troubleshooting.
