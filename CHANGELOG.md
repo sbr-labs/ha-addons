@@ -5,6 +5,18 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.26] - 2026-05-09
+
+### Changed
+- **Default home image is now a PNG**, served from the daemon's own
+  `/home_image` endpoint. The UC Remote 3 firmware only renders
+  raster art (PNG/JPG); the previous default — an SVG hosted on
+  Wikimedia Commons — wasn't displayed on the media-player widget
+  even though the URL was set. The bundled PNG looks the same as
+  before but actually appears on the Remote.
+- `HOME_IMAGE_URL` add-on option still works for users who want a
+  custom external URL (PNG/JPG only).
+
 ## [0.4.25] - 2026-05-09
 
 ### Added

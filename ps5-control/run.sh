@@ -129,21 +129,20 @@ export LISTEN_HOST="0.0.0.0"
 export LISTEN_PORT="8456"
 export PS5_CTRL_LOG_LEVEL="$LOG_LEVEL"
 
-# Home-screen / fallback image priority (since v0.4.21):
+# Home-screen / fallback image priority:
 #  1. user-supplied home_image_url in add-on options (any external URL)
-#  2. official PS5 wordmark hosted on Wikimedia Commons (default)
-#  3. bundled generic gamepad SVG inside the container (fallback if the
-#     Wikipedia URL ever stops working)
-DEFAULT_PS5_LOGO_URL="https://upload.wikimedia.org/wikipedia/commons/c/cb/PlayStation_5_logo_and_wordmark.svg"
+#  2. bundled PNG inside the container, served from the daemon's
+#     own /home_image endpoint (default — works without internet,
+#     reliably renders on the UC Remote 3 which expects raster art)
 if [[ -n "$HOME_IMAGE_URL" ]]; then
   export HOME_IMAGE_URL
   echo "==> Using home_image_url from add-on options: $HOME_IMAGE_URL"
 else
-  export HOME_IMAGE_URL="$DEFAULT_PS5_LOGO_URL"
-  echo "==> Using default PS5 wordmark from Wikimedia Commons."
+  export HOME_IMAGE_URL=""
+  echo "==> Using bundled PNG home image (served from /home_image)."
 fi
-# Also expose the bundled SVG as a file fallback the daemon will serve
-# from /home_image if anything explicit sets HOME_IMAGE_FILE.
-export HOME_IMAGE_FILE=/app/default-home-image.svg
+# Bundled PNG file path the daemon serves at /home_image when
+# HOME_IMAGE_URL is empty.
+export HOME_IMAGE_FILE=/app/default-home-image.png
 
 exec python /app/daemon.py
