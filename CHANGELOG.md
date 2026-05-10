@@ -5,6 +5,25 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.4] - 2026-05-10
+
+### Fixed
+- **Rate-limit regression introduced in 0.5.3.** Combining the
+  instant-fetch-on-button-press with a 2 s fast-poll caused Sony to
+  return HTTP 429 ("Too Many Requests") on `basicPresences`, which
+  blanked the widget — `app` came back empty even while a game was
+  running. v0.5.4 adds two protections so this can't happen again:
+  - **Min-fetch interval** (`PSN_MIN_FETCH_INTERVAL_S`, default 5 s).
+    Even if 50 button presses fire in a second, Sony only sees one
+    presence call every 5 s. Caller gets the cached result during the
+    cooldown so the widget stays populated.
+  - **Exponential backoff on 429.** When Sony rate-limits, the daemon
+    waits 30 s → 1 min → 2 min → 5 min before retrying instead of
+    hammering. First successful call resets the backoff. Cached
+    presence is served throughout so the widget never goes blank.
+- Fast-poll cadence raised back to **8 s** (was 2 s in 0.5.3) to stay
+  comfortably under Sony's threshold under normal load.
+
 ## [0.5.3] - 2026-05-10
 
 ### Changed
