@@ -77,6 +77,58 @@ The add-on saves `credentials.json` to `/data/credentials.json` (HA's persistent
 
 > **Decimal Account ID**: if you find your Account ID as a 19-digit decimal number (e.g. `7067298559098XXXXXX`), you can paste it directly — the add-on auto-converts to base64.
 
+## Get live game cover art on the media-player widget (optional)
+
+By default the media-player widget shows the bundled gamepad image regardless of what's running on the PS5. If you'd like it to show the **actual cover art for the game you're playing** (Call of Duty, Spider-Man, GT7, etc.) — and the title name in `/state` for HA automations — add your PSN cookie once and you're set forever.
+
+This works because Sony's PSN servers know what you're playing (same data the official PlayStation mobile app shows). The add-on asks them via Sony's REST API. Your PSN credentials never leave your home — only a token signed by Sony is stored locally at `/data/psn_tokens.json`.
+
+### Step 1 — Get your PSN cookie
+
+1. Open https://www.playstation.com in any browser and sign in to your PSN account.
+2. In the **same browser tab**, visit https://ca.account.sony.com/api/v1/ssocookie. You'll see something like:
+   ```
+   {"npsso":"<a very long string>"}
+   ```
+3. **Copy just the long string** between the quotes (not the curly braces, not the word `npsso`).
+
+### Step 2 — Paste it into the add-on
+
+1. In Home Assistant: **Settings → Add-ons → PS5 Control → Configuration** tab.
+2. Find the field labelled **"PSN npsso cookie (optional — for game cover art on the widget)"**.
+3. Paste the string from Step 1.
+4. Click **Save** at the bottom of the page.
+5. Click the **Restart** button at the top.
+
+### Step 3 — Confirm it's working
+
+Open the add-on **Log** tab. Within a few seconds you should see:
+
+```
+psn: bootstrapped tokens from npsso, persisted to /data/psn_tokens.json
+psn: resolved decimal account_id from /me
+psn_presence: enabled (poll every 30s)
+psn_presence: <game name> (PPSA...)
+```
+
+Within ~30 seconds, the Remote 3's media-player widget switches from the generic gamepad to the actual cover art for whatever's on screen. The `/state` endpoint also starts returning the real `app` and `app_id` (useful for HA automations / dashboards).
+
+### Step 4 — Clear the field (optional, but recommended)
+
+Once the add-on log shows `psn: loaded saved tokens from /data/psn_tokens.json` on a fresh restart, you know the saved tokens are working. You can then:
+
+1. Go back to **Configuration** tab
+2. **Clear** the `psn_npsso_token` field (leave it blank)
+3. Save → Restart
+
+The saved tokens at `/data/psn_tokens.json` take over from there. Your npsso never sits in HA config; the add-on auto-refreshes tokens forever (~60-day rolling refresh chain).
+
+### Notes
+
+- **Streaming apps** (Netflix, Sky Go, etc.): PSN sometimes reports them, sometimes returns blank — Sony's behaviour is less consistent for streaming than for games. If `app` stays empty in `/state` while you're in a streaming app, that's Sony, not the add-on.
+- **Privacy**: nothing leaves your network. The add-on talks directly to Sony's APIs; no third-party servers involved.
+- **Re-auth**: if the daemon is offline for ~2 months and tokens expire, paste a fresh npsso into the field again and Save+Restart. One re-auth at most every couple of months of complete inactivity.
+
 ## Use your own picture on the media-player widget (optional)
 
 By default, the Remote 3 shows a PS5 wordmark on the media-player widget when the PS5 is on the home screen (no game running). You can swap it for any picture you like — a screenshot, a piece of art, anything.

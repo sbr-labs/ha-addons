@@ -5,6 +5,17 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-05-10
+
+### Changed
+- README now has a dedicated step-by-step **"Get live game cover art
+  on the media-player widget"** section walking users through getting
+  their npsso from Sony's ssocookie URL, pasting it into the
+  Configuration tab, confirming the log lines, and (optionally)
+  clearing the field once saved tokens take over. Existing v0.5.0
+  users will see this in the addon page docs the next time they look
+  at the add-on. Docs only — no code change.
+
 ## [0.5.0] - 2026-05-10
 
 ### Added
