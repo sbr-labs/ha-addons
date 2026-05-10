@@ -5,6 +5,47 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-05-10
+
+### Added
+- **Live game cover art on the media-player widget (PSN presence).**
+  PS5 firmware 13.x stripped the running-app metadata from the local
+  DDP broadcast, so the daemon's `app_name` / `app_id` had been empty
+  regardless of what was playing. This release adds an optional PSN
+  REST client that fills that gap directly from Sony's "currently
+  playing" endpoint — same data source the PlayStation mobile app
+  uses. The Remote 3 widget now shows live game cover art (Call of
+  Duty, Spider-Man, GT7, etc.) when a PSN-catalogued title is
+  running, instead of always showing the fallback home image.
+- **One-time setup** via a new `psn_npsso_token` field in the addon
+  Configuration tab (password input). Paste your npsso cookie from
+  https://ca.account.sony.com/api/v1/ssocookie once; the daemon
+  exchanges it for OAuth tokens persisted at `/data/psn_tokens.json`
+  and never asks again (refresh tokens auto-roll). Leaving the field
+  blank disables presence and the daemon behaves as before.
+- **Catalog cover-art fallback.** When Sony's presence response omits
+  the cover URL for a title (happens for some games), the daemon
+  queries the public PSN catalog endpoint to fetch the
+  `GAMEHUB_COVER_ART` (16:9, fills the Remote 3 widget). Per-title
+  cache so it's one extra HTTP call per title change, never per poll.
+- Three knobs for power users: `PSN_PRESENCE_POLL_S` (default 30s)
+  and `PSN_TOKENS_PATH` env vars in addition to the addon UI field.
+
+### Changed
+- `/state` now returns real `app` / `app_id` / `image_url` whenever
+  presence is enabled and Sony reports a title (works around the
+  empty-DDP issue). Falls back to DDP when presence is disabled or
+  no PSN token is available.
+
+### Removed
+- DRM auto-disconnect watcher (added in v0.4.25). After real-world
+  testing, only Sky Go and HBO Max actually require tearing down
+  Remote Play to play; auto-disconnecting on a long list of apps
+  was solving a non-problem and silently disabling the Remote 3
+  during streaming was surprising. The `/disconnect?pause=N` and
+  `/reconnect` HTTP endpoints remain — use them in a Remote 3
+  activity or HA script for the apps that genuinely need it.
+
 ## [0.4.29] - 2026-05-09
 
 ### Changed

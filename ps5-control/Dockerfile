@@ -13,7 +13,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY daemon.py pair.py oauth_helper.py run.sh default-home-image.png ./
+COPY daemon.py psn_presence.py pair.py oauth_helper.py run.sh default-home-image.png ./
 RUN chmod +x run.sh
 
 ENV PYTHONUNBUFFERED=1

@@ -15,6 +15,10 @@ configuration:
     name: Custom media-player image (optional)
     description: >-
       Picture shown on the Remote 3 media-player widget when the PS5 is on the home screen (no game running). LEAVE BLANK to use the built-in PS5 wordmark — most users want this. To use your own picture, paste a direct link to a PNG or JPG file. Must end in .png or .jpg (NOT .svg, NOT a webpage). Tip — right-click any image online → "Copy image address". Example "https://example.com/my-art.png". Save → Restart the add-on. New image appears on the Remote within ~10 seconds.
+  psn_npsso_token:
+    name: PSN npsso cookie (optional — for game cover art on the widget)
+    description: >-
+      One-time paste to enable real-time "currently playing" + game cover art on the Remote 3 media-player widget. Without this, the widget shows the home image only. To get your npsso — sign in to your PSN account in any browser, open https://ca.account.sony.com/api/v1/ssocookie, copy the long value of "npsso" from the JSON (just the value, not the curly braces or quotes). Paste it here, Save, Restart. The add-on exchanges it for permanent OAuth tokens stored in /data/psn_tokens.json — you only do this once. You can clear this field after the first successful start; the saved tokens are what's used going forward. If Sony invalidates the tokens (~2 months idle), paste a fresh npsso here to re-bootstrap.
   log_level:
     name: Log level
     description: Daemon log verbosity. Set DEBUG only for troubleshooting.

@@ -18,6 +18,7 @@ ACCOUNT_ID=$(jq -r '.account_id // ""' "$CONFIG_FILE")
 OAUTH_REDIRECT=$(jq -r '.oauth_redirect_url // ""' "$CONFIG_FILE")
 PIN=$(jq -r '.pin // ""' "$CONFIG_FILE")
 HOME_IMAGE_URL=$(jq -r '.home_image_url // ""' "$CONFIG_FILE")
+PSN_NPSSO_TOKEN=$(jq -r '.psn_npsso_token // ""' "$CONFIG_FILE")
 LOG_LEVEL=$(jq -r '.log_level // "INFO"' "$CONFIG_FILE")
 
 if [[ -z "$PS5_HOST" ]]; then
@@ -128,6 +129,15 @@ export PS5_CREDS="$CREDS_FILE"
 export LISTEN_HOST="0.0.0.0"
 export LISTEN_PORT="8456"
 export PS5_CTRL_LOG_LEVEL="$LOG_LEVEL"
+
+# PSN presence — pass the user's npsso (if set) through to the daemon
+# so it can bootstrap OAuth tokens on first start. After that, tokens
+# live in /data/psn_tokens.json and the npsso field can stay set or be
+# cleared; the daemon prefers the saved tokens over re-bootstrapping.
+if [[ -n "$PSN_NPSSO_TOKEN" ]]; then
+  export PSN_NPSSO_TOKEN
+fi
+export PSN_TOKENS_PATH="/data/psn_tokens.json"
 
 # Home-screen / fallback image priority:
 #  1. user-supplied home_image_url in add-on options (any external URL)
