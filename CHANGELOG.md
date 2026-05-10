@@ -5,6 +5,31 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.3] - 2026-05-10
+
+### Changed
+- **Cover art now updates within ~1 second of any button press.** The
+  presence loop wakes up immediately on every `/button` call (via an
+  asyncio event) instead of waiting for the next poll cadence. So as
+  soon as you launch a new game from the Remote 3, the new cover art
+  flows to the widget on the next event-loop tick (~hundreds of
+  milliseconds), not 5–15 seconds later.
+- Fast-poll cadence further reduced from 5 s to 2 s for the active
+  window after a button press.
+- **Sony CDN size hint added (`?w=1920`)** to the cover-art URL. The
+  Remote 3 firmware appears to render the 4K source at a smaller
+  fixed size; asking Sony for a 1080p image instead tends to produce
+  a larger / sharper widget render.
+- Cover-art cache schema bumped — covers fetched under the old
+  preference order will be re-fetched once after this update.
+
+### Added
+- `PSN_COVER_ART_PREFERENCE` env var — comma-separated list of Sony's
+  image types in fallback order. Default
+  `SIXTEEN_BY_NINE_BANNER,GAMEHUB_COVER_ART,FOUR_BY_THREE_BANNER,MASTER,PORTRAIT_BANNER`.
+  Override if your widget is shaped differently from default (e.g.
+  set `MASTER` first if you've configured a square widget tile).
+
 ## [0.5.2] - 2026-05-10
 
 ### Changed
