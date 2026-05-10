@@ -5,6 +5,20 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5] - 2026-05-10
+
+### Fixed
+- **`IsADirectoryError` on first start for some users.** When the daemon
+  tried to read `/data/psn_tokens.json` and the path was a directory
+  (rather than a file), the resulting traceback would block PSN
+  presence from initialising. Now the daemon detects this case and
+  logs a clear "remove the directory and recreate as an empty file"
+  message, then continues running with PSN presence disabled until the
+  user follows the instruction. (HA add-on installs aren't typically
+  affected — this is mostly a Docker bind-mount gotcha hitting
+  standalone `docker compose` users; including the same defensive
+  check in the addon for safety.)
+
 ## [0.5.4] - 2026-05-10
 
 ### Fixed
