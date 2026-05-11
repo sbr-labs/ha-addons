@@ -5,6 +5,20 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.6] - 2026-05-11
+
+### Fixed
+- **`EBUSY: Device or resource busy` when saving PSN tokens.** The
+  atomic write pattern (write to `.tmp` → rename onto target) fails
+  on Docker **single-file bind mounts** because the bind-mount holds
+  the inode of the target — `os.replace()` then errors with EBUSY,
+  EBADF, ETXTBSY, or EXDEV depending on platform. v0.5.6 detects
+  these errnos and falls back to a direct write (open target with
+  truncate + write). Loses the crash-mid-write protection, but the
+  rare race window is a fair trade for working on every Docker setup.
+  Mostly affects standalone `docker compose` users; HA add-on's
+  `/data` is a regular HA-managed volume and doesn't hit this.
+
 ## [0.5.5] - 2026-05-10
 
 ### Fixed
