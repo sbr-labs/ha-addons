@@ -5,6 +5,19 @@ Versions track the `ps5-control` add-on (the only add-on in the repo right
 now). Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.7] - 2026-05-11
+
+### Fixed
+- Broadened the `_save_tokens()` fallback catch from four specific
+  errnos (EBUSY/EBADF/ETXTBSY/EXDEV) to any `OSError` on the rename
+  step. Some bind-mount / overlay / shared-fs setups raise other
+  errnos (EPERM, EACCES, EINVAL, EROFS) that v0.5.6 wouldn't have
+  caught. Verified by Docker test that real errors (read-only fs,
+  permission denied) still surface from the direct-write fallback,
+  so nothing is silently swallowed. Real Docker bind-mount EBUSY
+  case (the v0.5.5 → 0.5.6 reporter's situation) confirmed
+  resolved end-to-end before push this time.
+
 ## [0.5.6] - 2026-05-11
 
 ### Fixed
